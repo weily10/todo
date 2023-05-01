@@ -14,35 +14,28 @@
     </ul>
   </div>
 </template>
-<script>
-import { ref } from "vue";
+<script setup>
+import { ref } from 'vue';
 
-export default {
-  setup() {
-    const keyword = ref("");
-    let items = [];
-    function addItem() {
-      if (keyword.value) {
-        items.push({ name: keyword.value });
-        console.log("asas", items);
-        keyword.value = "";
-      }
-    }
+const keyword = ref("");
+const items = ref([]);
 
-    function deleteItem(index) {
-      items.splice(index)
-      items = items
-      console.log(items);
-    }
+const addItem = () => {
+  if (keyword.value) {
+    items.value.push({ name: keyword.value });
+    console.log("asas", items);
+    keyword.value = "";
+  }
+}
 
-    return {
-      deleteItem,
-      keyword,
-      items,
-      addItem,
-    };
-  },
+const deleteItem = (i) => {
+  items.value = items.value.filter((t) => {
+    console.log(t);
+    t != i;
+  });
 };
+
+
 </script>
 <style>
 .add {
