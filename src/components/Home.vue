@@ -8,14 +8,16 @@
     </div>
     <ul>
       <li v-for="(item, i) in items" :key="i">
-        {{ item.name }}
-        <button class="icon" @click="deleteItem(i)">-</button>
+        <div class="flex">
+          <div >{{ item.name }}</div>
+          <div><button class="icon" @click="deleteItem(i)">-</button></div>
+        </div>
       </li>
     </ul>
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const keyword = ref("");
 const items = ref([]);
@@ -23,21 +25,23 @@ const items = ref([]);
 const addItem = () => {
   if (keyword.value) {
     items.value.push({ name: keyword.value });
-    console.log("asas", items);
     keyword.value = "";
   }
-}
+};
 
 const deleteItem = (i) => {
   items.value = items.value.filter((t) => {
-    console.log(t);
     t != i;
   });
 };
-
-
 </script>
 <style>
+.flex {
+  align-items: center;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+}
 .add {
   margin: 6px;
 }
